@@ -8,9 +8,6 @@ namespace HW_Algorithm8
     {
         public static void BucketSort(int[] array)
         {
-            // Примем, что количество корзин равно количеству элементов в массиве-источнике.
-            // Тогда:
-            // массив корзин
             List<int>[] bucketSort = new List<int>[array.Length];
 
             // каждую корзину проинициализировать
