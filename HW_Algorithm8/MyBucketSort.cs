@@ -8,11 +8,15 @@ namespace HW_Algorithm8
     {
         public static void BucketSort(int[] array)
         {
-            List<int>[] bucketSort = new List<int>[array.Length];
+            List<List<int>> bucketSort = new List<List<int>>();
 
             // каждую корзину проинициализировать
-            for (int i = 0; i < bucketSort.Length; ++i)
-                bucketSort[i] = new List<int>();
+            int numberOfBuckets = 10;
+            for (int i = 0; i < numberOfBuckets; ++i)
+            {
+                List<int> list = new List<int>();
+                bucketSort.Add(list);
+            }
 
             // найти диапазон значений в массиве-источнике
             int minValue = array[0];
@@ -32,21 +36,21 @@ namespace HW_Algorithm8
             for (int i = 0; i < array.Length; ++i)
             {
                 // вычисление индекса корзины
-                int bucketIndex = (int)Math.Floor((array[i] - minValue) / numRange * (bucketSort.Length - 1));
+                int bucketIndex = (int)Math.Floor((array[i] - minValue) / numRange * (bucketSort.Count - 1));
 
                 // добавление элемента в соответствующую корзину
                 bucketSort[bucketIndex].Add(array[i]);
             }
 
             // сортировка корзин методом пузырька
-            for (int i = 0; i < bucketSort.Length; i++)
+            for (int i = 0; i < bucketSort.Count; i++)
             {
                 BubbleSortList(bucketSort[i]);
             }
 
             // собираем отсортированные элементы обратно в массив-источник
             int index = 0;
-            for (int i = 0; i < bucketSort.Length; ++i)
+            for (int i = 0; i < bucketSort.Count; ++i)
             {
                 for (int j = 0; j < bucketSort[i].Count; ++j)
                     array[index++] = bucketSort[i][j];
